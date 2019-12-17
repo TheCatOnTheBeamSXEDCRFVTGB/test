@@ -72,7 +72,57 @@ git reset--hard 版本号
 
 
 
+## 远程仓库使用
 
+a.使用clone指令克隆线上仓库到本地
+语法：
+
+```cmd
+git clone 线上仓库地址
+```
+
+b.在仓库上做对应的操作（提交暂存区、提交本地仓库、提交线上仓库、拉取线上仓库）
+提交到线上仓库的指令：
+
+```cmd
+git push
+```
+
+> git push 错误提示：
+>
+> remote: Permission to bjitcast/shop. git denied to chn20190910
+> fatal: unable to access ' https://github.com/bjitcast/shop.git/': The requested URL returned error: 403
+>
+> 403 错误代表没有权限
+>
+> 原因：
+> 在首次往线上仓库提交内容的时候出现了403 的致命错误，原因是不是任何人都可以往线上仓库提交内容，必须需鉴权。
+>
+> 处理：
+> 需要修改“.git/config"文件内容：
+>
+> #将
+> [remote"origin"]
+> url =https://github.com/用户名/仓库名.git
+> 修改为：
+> [remote"origin"]
+> url = https://用户名：密码@github.com/用户名/仓库名.git
+>
+> ```
+> [core]
+> 	repositoryformatversion = 0
+> 	filemode = false
+> 	bare = false
+> 	logallrefupdates = true
+> 	symlinks = false
+> 	ignorecase = true
+> [remote "origin"]
+> 	url = https://github.com/TheCatOnTheBeamSXEDCRFVTGB/test.git
+> 	fetch = +refs/heads/*:refs/remotes/origin/*
+> [branch "master"]
+> 	remote = origin
+> 	merge = refs/heads/master
+> ```
 
 
 
